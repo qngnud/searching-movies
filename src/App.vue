@@ -28,8 +28,6 @@
             MovieList,
             Search,
         },
-
-
         data() {
             return {
                 movies: []

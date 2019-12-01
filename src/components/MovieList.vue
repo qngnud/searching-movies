@@ -1,21 +1,30 @@
 <template>
-    <v-card>
-        <v-list-item v-for="movie in movies" :key="movie.imdbID">
-            <v-list-item-content>
-                <v-list-item-title>{{ movie.Title }}</v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
-    </v-card>
+    <v-container fluid>
+        <v-flex class="d-flex flex-wrap flex-row">
+            <v-flex class="pb-5" v-for="movie in movies" :key="movie.imdbID">
+                <MovieListItem :movie="movie"/>
+            </v-flex>
+            <v-spacer>
+
+            </v-spacer>
+        </v-flex>
+    </v-container>
+
 </template>
 
 <script>
+    import MovieListItem from "@/components/MovieListItem";
+
     export default {
         name: "MovieList",
-        props:{
-            movies:{
+        props: {
+            movies: {
                 type: Array,
                 required: true
             }
+        },
+        components: {
+            MovieListItem
         }
     }
 </script>

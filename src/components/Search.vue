@@ -1,9 +1,10 @@
 <template>
     <v-container>
         <v-flex>
-            <p>{{url}}</p>
             <v-text-field v-model="searchQuery" @keyup.enter="search" outlined placeholder="Enter the movie's name">
+
             </v-text-field>
+            <span v-if="error">{{error}}</span>
         </v-flex>
     </v-container>
 </template>
@@ -17,7 +18,8 @@
         data() {
             return {
                 searchQuery: '',
-                url: BASE_URL
+                url: BASE_URL,
+                error: ''
             }
         },
         methods: {
@@ -26,8 +28,9 @@
                 if (response.status === 200) {
                     let data = response.data
                     if (data.Response === 'True') {
+                        this.error = ''
                         return this.$emit('search', data.Search)
-                    }
+                    } else  this.error = data.Error
                 }
             }
         }
